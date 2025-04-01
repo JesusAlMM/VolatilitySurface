@@ -179,7 +179,8 @@ def page_one():
         )
         
         click_data = plotly_events(fig, click_event=True, hover_event=False)
-        
+        st.plotly_chart(fig, use_container_width=True)
+        click_data = None  
         if "last_save_time" not in st.session_state:
             st.session_state.last_save_time = time.time() 
         
