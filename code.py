@@ -156,8 +156,8 @@ def page_one():
         X = options_df['timeToExpiration']
         Z = options_df['impliedVolatility']
     
-        ti = np.linspace(X.min(), X.max(), 50)
-        ki = np.linspace(Y.min(), Y.max(), 50)
+        ti = np.linspace(X.min(), X.max(), 30)
+        ki = np.linspace(Y.min(), Y.max(), 30)
         T, K = np.meshgrid(ti, ki)
         Zi = griddata((X, Y), Z, (T, K), method='linear')
         Zi = np.ma.array(Zi, mask=np.isnan(Zi))
