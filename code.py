@@ -9,6 +9,7 @@ from scipy.interpolate import griddata
 import plotly.graph_objects as go
 from streamlit_plotly_events import plotly_events
 import time
+from io import BytesIO
 
 st.set_page_config(layout="wide")
 
@@ -178,6 +179,7 @@ def page_one():
             margin=dict(l=35, r=35, b=35, t=35)
         )
         
+        st.plotly_chart(fig, use_container_width=True)
         click_data = plotly_events(fig, click_event=True, hover_event=False)
         
         if "last_save_time" not in st.session_state:
@@ -196,10 +198,11 @@ def page_one():
         else:
             st.warning(f"There are {save_interval - elapsed_time:.0f} seconds remaining to save the graph.")
    
-        img_bytes = fig.to_image(format="png")
+        img_buffer = BytesIO()
+        fig.write_image(img_buffer, format="png")
         st.download_button(
             label="Download Graph",
-            data=img_bytes,
+            data=img_buffer.getvalue(),
             file_name="volatility_surface.png",
             mime="image/png"
         )
