@@ -179,6 +179,7 @@ def page_one():
             margin=dict(l=35, r=35, b=35, t=35)
         )
         
+        st.plotly_chart(fig, use_container_width=True)
         click_data = plotly_events(fig, click_event=True, hover_event=False)
         
         if "last_save_time" not in st.session_state:
@@ -206,12 +207,14 @@ def page_one():
             mime="image/png"
         )
    
-    with col2:
-        if click_data:
-            selected_time = click_data[0]['x']
-            selected_strike = click_data[0]['y']
+with col2:
+    if click_data and len(click_data) > 0: 
+        selected_time = click_data[0].get('x')
+        selected_strike = click_data[0].get('y')
+
+        if selected_time is not None and selected_strike is not None:
             implied_vol = griddata((X, Y), Z, (selected_time, selected_strike), method='linear')
-    
+
             if implied_vol is None or np.isnan(implied_vol):
                 st.warning("No volatility data available for the selected point.")
             else:
@@ -219,20 +222,22 @@ def page_one():
                     spot_price, selected_strike, selected_time, 
                     risk_free_rate, implied_vol, dividend_yield
                 )
-    
+
                 col_symbol, col_name, col_value = st.columns([0.25, 1, 2])
-    
+
                 symbols = ["Δ", "Γ", "Θ", "V", "ρ"]
                 names = ["Delta:", "Gamma:", "Theta:", "Vega:", "Rho:"]
                 values = [f"{delta:.4f}", f"{gamma:.4f}", f"{theta:.4f}", f"{vega:.4f}", f"{rho:.4f}"]
-    
+
                 for symbol, name, value in zip(symbols, names, values):
                     col_symbol.write(f"**{symbol}**") 
                     col_name.write(name)              
                     col_value.write(value)            
         else:
-            st.info("Click on the volatility surface plot to calculate Greeks for a specific option.")
-
+            st.warning("Invalid click data received.")
+    else:
+        st.info("Click on the volatility surface plot to calculate Greeks for a specific option.")
+        
 def page_two():
     st.title("Recorded Graphs")
     st.button("Go back", on_click=lambda: st.session_state.update({"page": "page_1"}))
