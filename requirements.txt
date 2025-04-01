@@ -1,8 +1,7 @@
-streamlit
-yfinance
-pandas
-numpy
-scipy
-plotly
-streamlit_plotly_events
-kaleido
+streamlit==1.32.2
+yfinance==0.2.37
+pandas==2.1.4
+numpy==1.26.2
+scipy==1.11.4
+plotly==5.18.0
+streamlit-plotly-events==0.0.4
