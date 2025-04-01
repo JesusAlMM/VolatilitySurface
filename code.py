@@ -9,8 +9,7 @@ from scipy.interpolate import griddata
 import plotly.graph_objects as go
 from streamlit_plotly_events import plotly_events
 import time
-import plotly.io as pio
-pio.renderers.default = "iframe"
+
 st.set_page_config(layout="wide")
 
 if "vol_surface_history" not in st.session_state:
@@ -156,8 +155,8 @@ def page_one():
         X = options_df['timeToExpiration']
         Z = options_df['impliedVolatility']
     
-        ti = np.linspace(X.min(), X.max(), 30)
-        ki = np.linspace(Y.min(), Y.max(), 30)
+        ti = np.linspace(X.min(), X.max(), 50)
+        ki = np.linspace(Y.min(), Y.max(), 50)
         T, K = np.meshgrid(ti, ki)
         Zi = griddata((X, Y), Z, (T, K), method='linear')
         Zi = np.ma.array(Zi, mask=np.isnan(Zi))
@@ -167,7 +166,11 @@ def page_one():
             colorscale='Spectral',
             colorbar_title=''
         )])
-    
+
+        st.write("Debug - Datos de la figura (Zi):", Zi) 
+        st.write("¿Contiene NaN?", np.isnan(Zi).any()) 
+        st.write("Configuración de renderizado:", pio.renderers.default) 
+        
         fig.update_layout(
             scene=dict(
                 xaxis_title='Time to Exp',
