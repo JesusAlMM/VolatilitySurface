@@ -160,7 +160,11 @@ def page_one():
         T, K = np.meshgrid(ti, ki)
         Zi = griddata((X, Y), Z, (T, K), method='linear')
         Zi = np.ma.array(Zi, mask=np.isnan(Zi))
-    
+        
+        Zi = np.ma.filled(Zi, np.nan)  
+        Zi = np.where(Zi == None, 0, Zi) 
+        Zi = np.nan_to_num(Zi, nan=0.0)  
+        
         fig = go.Figure(data=[go.Surface(
             x=T, y=K, z=Zi,
             colorscale='Spectral',
