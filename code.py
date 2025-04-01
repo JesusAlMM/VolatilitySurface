@@ -160,7 +160,10 @@ def page_one():
         T, K = np.meshgrid(ti, ki)
         Zi = griddata((X, Y), Z, (T, K), method='linear')
         Zi = np.ma.array(Zi, mask=np.isnan(Zi))
-    
+
+        if np.isnan(Zi).all():
+            st.error("Error al interpolar la superficie. Intenta con otro conjunto de datos.")
+
         fig = go.Figure(data=[go.Surface(
             x=T, y=K, z=Zi,
             colorscale='Spectral',
@@ -179,8 +182,7 @@ def page_one():
         )
         
         click_data = plotly_events(fig, click_event=True, hover_event=False)
-        st.plotly_chart(fig, use_container_width=True)
-        click_data = None  
+
         if "last_save_time" not in st.session_state:
             st.session_state.last_save_time = time.time() 
         
