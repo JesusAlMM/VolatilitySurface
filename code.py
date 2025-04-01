@@ -175,7 +175,9 @@ def page_one():
             ),
             paper_bgcolor='rgba(0,0,0,0)', 
             plot_bgcolor='rgba(0,0,0,0)', 
-            margin=dict(l=35, r=35, b=35, t=35)
+            margin=dict(l=35, r=35, b=35, t=35),
+            autosize=True,
+            height=800 
         )
         
         click_data = plotly_events(fig, click_event=True, hover_event=False)
