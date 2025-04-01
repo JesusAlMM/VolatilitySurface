@@ -1,39 +1,50 @@
-Volatility Surface Visualization App
-This repository provides an interactive Volatility Surface Visualization dashboard, designed to help users explore the implied volatility of options across different strike prices and time to expiration. The app is built for quantitative finance professionals, traders, and researchers who want to analyze market behavior dynamically.
+# **Volatility Surface Visualization App**
 
-🔗 Live Demo: [Your Streamlit App URL]
+This repository contains an interactive **Volatility Surface Visualization App**, designed to compute and visualize the implied volatility surface of options using the **Black-Scholes model**. The application allows users to explore the volatility structure across different strike prices and expiration dates dynamically. Additionally, it provides tools for analyzing **option Greeks** and tracking historical volatility surfaces over time.  
 
-🚀 Features
-1️⃣ Volatility Surface Calculation
-Generates an interactive volatility surface based on the Black-Scholes model.
+🔗 **Live Demo:** [Your Streamlit App URL]  
 
-Users can visualize how implied volatility varies with strike price and time to expiration.
+## 🚀 **Features**  
 
-2️⃣ Interactive Exploration
-Click on the volatility surface to compute Greeks (Delta, Gamma, Vega, Theta, Rho).
+### 📈 **Volatility Surface Calculation**  
+- Generates a **3D volatility surface** based on the Black-Scholes model.  
+- Displays how implied volatility changes across **strike prices** and **time to expiration**.  
+- Provides an interactive visualization using **Plotly**.  
 
-The selected option’s strike price, implied volatility, and other parameters are displayed.
+### 📊 **Greeks Calculation**  
+- Click anywhere on the volatility surface to calculate key **Greeks**:  
+  - **Delta** (sensitivity to price changes)  
+  - **Gamma** (rate of change of Delta)  
+  - **Vega** (sensitivity to volatility changes)  
+  - **Theta** (time decay effect)  
+  - **Rho** (sensitivity to interest rate changes)  
+- Selected values, including **strike price** and **implied volatility**, are displayed in real time.  
 
-3️⃣ Historical Volatility Surfaces
-Allows users to save and analyze historical volatility surfaces over time.
+### 🖼 **Volatility Surface Gallery**  
+- Users can **save volatility surfaces** at different time intervals (**30 min, 1 hour, 1 day, etc.**) to analyze changes over time.  
+- The stored surfaces can be revisited in a historical visualization section.  
+- Saves data in an **Excel file**, including input parameters and generated plots, instead of using local folders.  
 
-Supports different time intervals (e.g., 30 min, 1 hour, 1 day).
+### ⚙️ **Customizable Parameters**  
+- Adjust key inputs such as:  
+  - **Spot price**  
+  - **Strike price**  
+  - **Volatility**  
+  - **Time to maturity**  
+  - **Risk-free rate**  
+- The app dynamically updates all calculations based on user inputs.  
 
-Stores data in an Excel file for further analysis instead of local folders.
+## 🔧 **Dependencies**  
+- **Streamlit** – Web-based interactive dashboard.  
+- **Plotly** – High-quality 3D visualization.  
+- **NumPy & Pandas** – Data processing and calculations.  
+- **yFinance** (optional) – Fetches real-time market data.  
 
-4️⃣ Customizable Parameters
-Users can adjust spot price, volatility, strike price, time to maturity, and risk-free rate.
+## 📌 **How to Run**  
 
-The app dynamically updates the volatility surface based on user inputs.
-
-🔧 Dependencies
-Streamlit: Interactive web-based dashboard framework.
-
-Plotly: High-quality 3D surface plotting for the volatility surface.
-
-NumPy & Pandas: Data processing and numerical calculations.
-
-yFinance (optional): Fetches real-time market data.
+1. Clone this repository:  
+   ```bash
+   git clone https://github.com/yourusername/your-repository.git
 
 
 
