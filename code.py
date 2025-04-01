@@ -160,21 +160,13 @@ def page_one():
         T, K = np.meshgrid(ti, ki)
         Zi = griddata((X, Y), Z, (T, K), method='linear')
         Zi = np.ma.array(Zi, mask=np.isnan(Zi))
-        
-        Zi = np.ma.filled(Zi, np.nan)  
-        Zi = np.where(Zi == None, 0, Zi) 
-        Zi = np.nan_to_num(Zi, nan=0.0)  
-        
+    
         fig = go.Figure(data=[go.Surface(
             x=T, y=K, z=Zi,
             colorscale='Spectral',
             colorbar_title=''
         )])
-
-        st.write("Debug - Datos de la figura (Zi):", Zi) 
-        st.write("¿Contiene NaN?", np.isnan(Zi).any()) 
-        st.write("Configuración de renderizado:", pio.renderers.default) 
-        
+    
         fig.update_layout(
             scene=dict(
                 xaxis_title='Time to Exp',
@@ -183,9 +175,7 @@ def page_one():
             ),
             paper_bgcolor='rgba(0,0,0,0)', 
             plot_bgcolor='rgba(0,0,0,0)', 
-            margin=dict(l=35, r=35, b=35, t=35),
-            autosize=True,
-            height=800 
+            margin=dict(l=35, r=35, b=35, t=35)
         )
         
         click_data = plotly_events(fig, click_event=True, hover_event=False)
