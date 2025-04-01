@@ -9,7 +9,8 @@ from scipy.interpolate import griddata
 import plotly.graph_objects as go
 from streamlit_plotly_events import plotly_events
 import time
-
+import plotly.io as pio
+pio.renderers.default = "iframe"
 st.set_page_config(layout="wide")
 
 if "vol_surface_history" not in st.session_state:
