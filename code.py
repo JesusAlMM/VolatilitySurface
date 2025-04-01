@@ -285,8 +285,3 @@ if st.session_state.page == "page_1":
     page_one()
 elif st.session_state.page == "page_2":
     page_two()
-
-
-
-#    C:\Users\Asus\Desktop\1
- #   archivo = "2.py"
