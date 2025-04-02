@@ -6,3 +6,4 @@ scipy
 plotly
 streamlit-plotly-events
 plotly.graph_objects
+kaleido
