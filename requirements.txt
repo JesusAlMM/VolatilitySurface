@@ -4,6 +4,4 @@ pandas
 numpy
 scipy
 plotly
-streamlit-plotly-events
-plotly.graph_objects
-kaleido
+streamlit_plotly_events
