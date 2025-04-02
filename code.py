@@ -180,9 +180,10 @@ def page_one():
             plot_bgcolor='rgba(0,0,0,0)', 
             margin=dict(l=35, r=35, b=35, t=35)
         )
-        
-        click_data = st.plotly_chart(fig, use_container_width=True)
 
+        st.plotly_chart(fig, use_container_width=True)
+        click_data = plotly_events(fig, click_event=True, hover_event=False)
+        
         if "last_save_time" not in st.session_state:
             st.session_state.last_save_time = time.time() 
         
