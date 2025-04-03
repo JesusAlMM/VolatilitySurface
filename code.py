@@ -161,8 +161,9 @@ def page_one():
         Zi = griddata((X, Y), Z, (T, K), method='linear')
         Zi = np.ma.array(Zi, mask=np.isnan(Zi))
 
-        if np.isnan(Zi).all():
-            st.error("Error al interpolar la superficie. Intenta con otro conjunto de datos.")
+       if np.isnan(Zi).any():
+            st.warning("Algunos valores interpolados son NaN. Intentando rellenar...")
+            Zi = np.nan_to_num(Zi, nan=np.nanmean(Zi))
 
         fig = go.Figure(data=[go.Surface(
             x=T, y=K, z=Zi,
